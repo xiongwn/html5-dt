@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+	body {
+		background-image: url("./cover/bg.png");
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		overflow: hidden;
+	}
+	*{
+		margin:0;
+		padding: 0
+	}
+	@keyframes move{
+		from{transform: scale(1);}
+		to{transform: scale(1.5);}
+	}
+	img{
+		animation: move 1s infinite alternate;
+	}
+</style>
+	<title>测测你在美丽国度的仙位</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript">
+		window.onload=function(){
+			function resize(){
+			var width=$(window).width()
+		var height=$(window).height()
+		$('body').css({"width":width,"height":height})
+	}
+
+	resize()
+	window.onresize=resize
+		}
+	</script>
+</head>
+<body>
+<a  href="1.html">
+<img src="./cover/start.png" style="width: 40%;position: absolute;left: 30%;bottom: 0"></a>
+</body>
+</html>

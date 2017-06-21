@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+	body {
+		background-image: url("./3/3bg.png");
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+	overflow: hidden;
+	}
+	*{
+		margin:0;
+		padding: 0
+	}
+	#circle{
+		animation: move 0.5s ease-in-out infinite alternate
+	}
+	@keyframes move{
+		0%{transform: rotate(0);}
+		20%{transform: rotate(3deg);}
+		40%{transform: rotate(-6deg);}
+		60%{transform: rotate(6deg);}
+		80%{transform: rotate(-3deg);}
+		100%{transform: rotate(0);}
+	}
+</style>
+	<title>测测你在美丽国度的仙位</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript">
+		window.onload=function(){
+			var answer=2
+			var search=window.location.search;
+			var count=parseInt(search.slice(search.indexOf("?count=")+7,search.indexOf("?count=")+8))
+			if(isNaN(count))
+			{
+				count=0
+			}
+			function resize(){
+				var width=$(window).width()
+		var height=$(window).height()
+		$('body').css({"width":width,"height":height})
+		$("div").eq(0).css({"width":width*0.4,"height":width*0.08,"left":"15%","bottom":"43%"})
+		$("div").eq(1).css({"width":width*0.35,"height":width*0.08,"left":"15%","bottom":"37%"})
+		$("div").eq(2).css({"width":width*0.35,"height":width*0.08,"left":"15%","bottom":"32%"})
+		$("div").eq(3).css({"width":width*0.35,"height":width*0.08,"left":"15%","bottom":"27%"})
+		$("#result").css({"width":width*0.2,"height":width*0.2,"left":"15%","bottom":"32%"})
+		$(".choose").on("click",function(){
+			
+			var yours=$(this).index()
+			$("#result").css({"display":"block"})
+			$("#result").html("<img src='./right.png' style='width:100%'>")
+				
+			if(yours===answer)
+			{
+				count++
+				document.getElementById("right").play()
+				setTimeout(function(){window.location.href="4.html?count="+count},1000)
+			}
+			else
+			{
+				document.getElementById("wrong").play()
+				setTimeout(function(){window.location.href="4.html?count="+count},1000)
+			}
+		})
+			}
+		// 	$("html").one("touchstart",function(){
+		// 	document.getElementById("audio").play()
+		// })
+			resize()
+			window.onresize=resize
+		}
+	</script>
+</head>
+<body>
+<div class="choose" style="position: absolute;z-index: 1"></div>
+<div class="choose" style="position: absolute;z-index: 1"></div>
+<div class="choose" style="position: absolute;z-index: 1"></div>
+<div class="choose" style="position: absolute;z-index: 1"></div>
+<img id="circle" src="./circle.png" style="width: 95%;top:9%;position: absolute;height: 50%;">
+<div id="result" style="display: none;position: absolute;"></div>
+<audio id="right" src="3.wav" style="display: none;"></audio>
+<audio id="wrong" src="2.wav" style="display: none;"></audio>
+<audio id="audio" src="bgm.mp3" autoplay="autoplay" loop="loop" style="display: none;" controls="controls"></audio>
+</body>
+</html>

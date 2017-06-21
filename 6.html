@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+	body {
+		background-image: url("./6/6bg.png");
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+	overflow: hidden;
+	}
+	*{
+		margin:0;
+		padding: 0
+	}
+	.answer{
+		animation: move 1s infinite 
+	}
+	@keyframes move{
+		0% {transform: translateY(5px);}
+		20%{transform: translateY(0);}
+		40%{transform: translateY(10px);}
+		55% {transform: translateY(0);}
+		70%{transform: translateY(10px);}
+		80%{transform: translateY(0);}
+		90%{transform: translateY(5px);}
+		100%{transform: translateY(0);}
+		}
+</style>
+	<title>测测你在美丽国度的仙位</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript">
+		window.onload=function(){
+			var answer=2;
+			var search=window.location.search;
+			var count=parseInt(search.slice(search.indexOf("?count=")+7,search.indexOf("?count=")+8))
+			if(isNaN(count))
+			{
+				count=0
+			}
+			function resize(){
+				
+			var width=$(window).width()
+		var height=$(window).height()
+		$('body,#bg').css({"width":width,"height":height})
+		
+		$("div").eq(0).css({"bottom":"40%","left":"20%"})
+		$("div").eq(1).css({"bottom":"30%","left":"40%"})
+		$("div").eq(2).css({"bottom":"19%","left":"25%"})
+		$("div").eq(3).css({"bottom":"8%","left":"45%"})
+		$("#result").css({"width":width*0.2,"height":width*0.2,"left":"25%","bottom":"19%"})
+		$("div.choose").on("click",function(){
+			var yours=$(this).index()
+			$("#result").css({"display":"block"})
+			$("#result").html("<img src='./right.png' style='width:100%'>")
+				
+			if(yours===answer)
+			{
+				count++
+				document.getElementById("right").play()
+				setTimeout(function(){window.location.href="7.html?count="+count},1000)
+			}
+			else
+			{
+				document.getElementById("wrong").play()
+				setTimeout(function(){window.location.href="7.html?count="+count},1000)
+			}
+		})
+	}
+	// $("html").one("touchstart",function(){
+	// 		document.getElementById("audio").play()
+	// 	})
+	resize()
+	window.onresize=resize
+		}
+	</script>
+</head>
+<body>
+<div class="choose" style="position: absolute;height: 5%;width: 40%;background-image: url('./6/1.png');background-position: 50%;background-size: 90%;background-repeat: no-repeat;"></div>
+<div class="choose" style="position: absolute;height: 5%;width: 40%;background-image: url('./6/2.png');background-position: 50%;background-size: 90%;background-repeat: no-repeat;"></div>
+<div class="choose" style="position: absolute;height: 5%;width: 40%;background-image: url('./6/3.png');background-position: 50%;background-size: 90%;background-repeat: no-repeat;"></div>
+<div class="choose" style="position: absolute;height: 5%;width: 40%;background-image: url('./6/4.png');background-position: 50%;background-size: 90%;background-repeat: no-repeat;"></div>
+<div id="result" style="display: none;position: absolute;"></div>
+<audio id="right" src="3.wav" style="display: none;"></audio>
+<audio id="wrong" src="2.wav" style="display: none;"></audio>
+<audio id="audio" src="bgm.mp3" autoplay="autoplay" loop="loop" style="display: none;" controls="controls"></audio>
+</body>
+</html>
